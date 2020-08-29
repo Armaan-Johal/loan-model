@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<div class="container text-left">
+	<br>
+	<h1>Loan Pricing Model Tool</h1>
+
+	<form action="{%  url 'result' %}">
+		<select name="mtype">
+			<option value="Residential">Residential</option>
+			<option value="Commercial">Commercial</option>
+		</select> Morgage Type
+	<br>
+		<input type="text" name="price"> Purchase Price
+	<br>
+		<input type="text" name="dp"> Down Payment (%)
+	<br>
+		<select name="cscore">
+			<option value="0.375"><650</option>
+			<option value="0.2">651-700</option>
+			<option value="0" selected="selected">701-750</option>
+			<option value="-0.1">751-800</option>
+			<option value="-0.25">801+</option>
+		</select> Credit Score Range
+	<br>
+		<select name="term">
+			<option value="5">5-Year Fixed</option>
+			<option value="10">10-Year Fixed</option>
+			<option value="15">15-Year Fixed</option>
+			<option value="30" selected="selected">30-Year Fixed</option>
+			<option value="1.1">1/1 ARM</option>
+			<option value="3.1">3/1 ARM</option>
+			<option value="5.1">5/1 ARM</option>
+			<option value="10.1">10/1 ARM</option>
+		</select> Loan Term
+	<br>
+		<input type="text" name="deposit"> Deposit Amount (if applicable)
+	<br>
+		<input type="text" name="pts"> Points Paid Down
+	<br>
+		<input type="checkbox" name="refinance"> Refinance
+	<br>
+		<input type="checkbox" name="crefinance"> Cash Out Refinance
+	<br>
+		<input type="checkbox" name="foreign"> Foreign National
+	<br>
+		<input type="submit" value="View Loan" class="btn btn-primary">
+	</form>
+
+
+</div>
