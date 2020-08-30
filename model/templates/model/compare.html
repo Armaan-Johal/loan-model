@@ -1,1 +1,111 @@
-<h2>COMPARE</h2>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+<br>
+
+	<h1 style="text-align:center;">Loan Pricing Model Tool</h1>
+	<h2 style="text-align:center;">Compare Two Loans</h2>
+
+<br>
+
+<div class="container text-left">
+
+	<h3>First Loan</h3>
+	<form action="{%  url 'rescompare' %}">
+		<select name="mtype1">
+			<option value="Residential" selected="selected">Residential</option>
+			<option value="Commercial">Commercial</option>
+		</select> Morgage Type
+	<br>
+		<input type="text" name="price1" required=True> Purchase Price
+	<br>
+		<input type="text" name="dp1" required=True> Down Payment (%)
+	<br>
+		<select name="cscore1">
+			<option value="0">N/A</option>
+			<option value="0.375"><650</option>
+			<option value="0.2">651-700</option>
+			<option value="0" selected="selected">701-750</option>
+			<option value="-0.1">751-800</option>
+			<option value="-0.25">801+</option>
+		</select> Credit Score Range
+	<br>
+		<select name="term1">
+			<option value="5">5-Year Fixed</option>
+			<option value="10">10-Year Fixed</option>
+			<option value="15">15-Year Fixed</option>
+			<option value="30" selected="selected">30-Year Fixed</option>
+			<option value="1.1">1/1 ARM</option>
+			<option value="3.1">3/1 ARM</option>
+			<option value="5.1">5/1 ARM</option>
+			<option value="10.1">10/1 ARM</option>
+		</select> Loan Term
+	<br>
+		<input type="text" name="ARM_rate1"> Yearly Increase in ARM Rate (%) (if applicable)
+	<br>
+		<input type="text" name="deposit1"> Deposit Amount (if applicable)
+	<br>
+		<input type="text" name="pts1"> Points Paid Down
+	<br>
+		<input type="checkbox" name="refinance1"> Refinance
+	<br>
+		<input type="checkbox" name="crefinance1"> Cash Out Refinance
+	<br>
+		<input type="checkbox" name="foreign1"> Foreign National
+	<br>
+	<br>
+
+
+	<h3>Second Loan</h3>
+		<select name="mtype2">
+			<option value="Residential">Residential</option>
+			<option value="Commercial">Commercial</option>
+		</select> Morgage Type
+	<br>
+		<input type="text" name="price2" required=True> Purchase Price
+	<br>
+		<input type="text" name="dp2" required=True> Down Payment (%)
+	<br>
+		<select name="cscore2">
+			<option value="0">N/A</option>
+			<option value="0.375"><650</option>
+			<option value="0.2">651-700</option>
+			<option value="0" selected="selected">701-750</option>
+			<option value="-0.1">751-800</option>
+			<option value="-0.25">801+</option>
+		</select> Credit Score Range
+	<br>
+		<select name="term2">
+			<option value="5">5-Year Fixed</option>
+			<option value="10">10-Year Fixed</option>
+			<option value="15">15-Year Fixed</option>
+			<option value="30" selected="selected">30-Year Fixed</option>
+			<option value="1.1">1/1 ARM</option>
+			<option value="3.1">3/1 ARM</option>
+			<option value="5.1">5/1 ARM</option>
+			<option value="10.1">10/1 ARM</option>
+		</select> Loan Term
+	<br>
+		<input type="text" name="ARM_rate2"> Yearly Increase in ARM Rate (%) (if applicable)
+	<br>
+		<input type="text" name="deposit2"> Deposit Amount (if applicable)
+	<br>
+		<input type="text" name="pts2"> Points Paid Down
+	<br>
+		<input type="checkbox" name="refinance2"> Refinance
+	<br>
+		<input type="checkbox" name="crefinance2"> Cash Out Refinance
+	<br>
+		<input type="checkbox" name="foreign2"> Foreign National
+	<br>
+
+
+
+	<br>
+		<input type="submit" value="Compare" class="btn btn-primary">
+	</form>
+
+	<a href="{% url 'home' %}" class="btn btn-secondary">Back to One Loan</a>
+	<br>
+	<br>
+
+</div>

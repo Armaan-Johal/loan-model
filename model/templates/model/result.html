@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <br>
 {{ r }}%      rate
 <br>
@@ -7,6 +9,32 @@ ${{ P }}      Loan Amount
 <br>
 ${{ M }}      Monthly payment 
 <br>
-{{ AMR }}      Is it an AMR?
+{{ ARM }}      Is it an ARM?
 <br>
-<a href= "{% url 'home' %}" class="btn btn-warning">Home</a>
+{% if ARM %}
+{{ ARM_rate }}%     ARM yearly rate increase
+{% endif %}
+<br>
+<br>
+<br>
+${{ P }}      Total Principal Paid
+<br>
+${{ dfi }}      Total Interest Paid
+<br>
+${{ dfa }}      Total Amount Paid
+<br>
+<a href= "{% url 'home' %}" class="btn btn-secondary">Home</a>
+<br>
+<br>
+<a href= "{% url 'compare' %}" class="btn btn-success">Compare with Another Loan</a>
+<br>
+<br>
+
+{{ plt_div|safe }}
+
+<br>
+{{ plt2_div|safe }}
+
+<br>
+
+

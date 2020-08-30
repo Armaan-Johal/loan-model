@@ -10,11 +10,12 @@
 			<option value="Commercial">Commercial</option>
 		</select> Morgage Type
 	<br>
-		<input type="text" name="price"> Purchase Price
+		<input type="text" name="price" required=True> Purchase Price
 	<br>
-		<input type="text" name="dp"> Down Payment (%)
+		<input type="text" name="dp" required=True> Down Payment (%)
 	<br>
 		<select name="cscore">
+			<option value="0">N/A</option>
 			<option value="0.375"><650</option>
 			<option value="0.2">651-700</option>
 			<option value="0" selected="selected">701-750</option>
@@ -33,6 +34,8 @@
 			<option value="10.1">10/1 ARM</option>
 		</select> Loan Term
 	<br>
+		<input type="text" name="ARM_rate"> Yearly Increase in ARM Rate (%) (if applicable)
+	<br>
 		<input type="text" name="deposit"> Deposit Amount (if applicable)
 	<br>
 		<input type="text" name="pts"> Points Paid Down
@@ -45,6 +48,9 @@
 	<br>
 		<input type="submit" value="View Loan" class="btn btn-primary">
 	</form>
+	
+	<a href="{% url 'compare' %}" class="btn btn-success">Compare with Another Loan</a>
+
 
 
 </div>

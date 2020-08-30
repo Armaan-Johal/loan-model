@@ -1,1 +1,88 @@
-<h2>RESCOMPARE</h2>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<div class="col-sm-12">
+	<div style="display: inline-block;">
+		<h2 style="text-align:left;">Results of First Loan</h2>
+
+		<br>
+		{{ r }}% =     Interest rate
+		<br>
+		${{ P }} =     Loan Amount
+		<br>
+		{{ n }}  =    Total payments
+		<br>
+		${{ M }}  =    Monthly payment 
+		<br>
+		{{ ARM }}  =    Is it an ARM?
+		<br>
+		{% if ARM %}
+		{{ ARM_rate }}%  =   ARM yearly rate increase
+		{% endif %}
+		<br>
+		<br>
+		<br>
+		${{ P }}  =    Total Principal Paid
+		<br>
+		${{ dfi }}  =    Total Interest Paid
+		<br>
+		${{ dfa }}   =   Total Amount Paid
+		<br>
+		<br>
+		<a href= "{% url 'home' %}" class="btn btn-secondary">Home</a>
+		<br>
+		<br>
+
+		{{ plt_div|safe }}
+
+		<br>
+		{{ plt2_div|safe }}
+
+		<br>
+
+
+	</div>
+	<div style="display: inline-block;">
+		<br>
+		<h2 style="text-align:left;">Results of Second Loan</h2>
+
+		<br>
+		{{ r1 }}%  =    rate
+		<br>
+		${{ P1 }}  =    Loan Amount
+		<br>
+		{{ n1 }}  =    Total payments
+		<br>
+		${{ M1 }}  =    Monthly payment 
+		<br>
+		{{ ARM1 }}  =    Is it an ARM?
+		<br>
+		{% if ARM1 %}
+		{{ ARM_rate1 }}%   =  ARM yearly rate increase
+		{% endif %}
+		<br>
+		<br>
+		<br>
+		${{ P1 }}    =  Total Principal Paid
+		<br>
+		${{ dfi1 }}   =   Total Interest Paid
+		<br>
+		${{ dfa1 }}  =    Total Amount Paid
+		<br>
+		<br>
+		<a href= "{% url 'compare' %}" class="btn btn-success">Compare with Another Loan</a>
+		<br>
+		<br>
+
+		{{ plt_div1|safe }}
+
+		<br>
+		{{ plt2_div1|safe }}
+
+		<br>
+		<br>
+
+
+	</div>
+</div>
+
+

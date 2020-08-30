@@ -1,5 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from plotly.offline import plot
+import plotly.graph_objs as go
+import plotly.express as px
+from datetime import datetime
+import pandas as pd
+import numpy as np 
+from .models import Dashboard
 
 # Create your views here.
 def home(request):
@@ -8,12 +15,10 @@ def home(request):
 
 def result(request):
 
-	interest_rate = 4.5
-
-	price = int(request.GET.get('price').replace(',', ''))
-	dpayment = int(request.GET.get('dp').replace(',', ''))
+	price = int(float(request.GET.get('price').replace(',', '')))
+	dpayment = int(float(request.GET.get('dp').replace(',', '')))
 	if request.GET.get('deposit'):
-		deposit = int(request.GET.get('deposit').replace(',', ''))
+		deposit = int(float(request.GET.get('deposit').replace(',', '')))
 	else:
 		deposit=0
 	cscore = float(request.GET.get('cscore'))
@@ -22,43 +27,19 @@ def result(request):
 		pts = float(request.GET.get('pts').replace(',', ''))
 	else:
 		pts=0
+	ARM_rate = 0
+	if term.is_integer()==False:
+		ARM_rate = float(request.GET.get('ARM_rate'))
 
 	morgage_type = request.GET.get('mtype')
 	ref = request.GET.get('refinance')
 	cref = request.GET.get('crefinance')
 	fn = request.GET.get('foreign')
 
-	deposit_rr = (-0.88*(deposit/(price-dpayment)))+0.15
-	pts_rr = -0.5*(pts)
+	context_list = Dashboard.dash(price, dpayment, deposit, cscore, term, pts, morgage_type, ref, cref, fn, ARM_rate)
+	context = {'r': context_list[0] , 'P': context_list[1] , 'n': context_list[2] , 'M': context_list[3] , 'ARM': context_list[4], 'r_adj': context_list[5], 'principal_list': context_list[6], 'interest_list': context_list[7], 'plt_div': context_list[8], 'dfp': context_list[9], 'dfi': context_list[10], 'dfa': context_list[11], 'ARM_rate': context_list[12], 'plt2_div': context_list[13]}
 
-	if ref:
-		ref_rr = 0.25
-	else:
-		ref_rr = 0
-	if cref:
-		cref_rr = 0.5
-	else:
-		cref_rr = 0
-	if fn:
-		fn_rr = 1.5
-	else:
-		fn_rr = 0
-
-	if term.is_integer():
-		AMR = False
-	else:
-		term = term - 0.1
-		AMR = True
-	
-	r = ((interest_rate + cscore + deposit_rr + pts_rr + ref_rr + cref_rr + fn_rr)/100)/12
-	P = price-dpayment
-	n = term*12
-	M = ((P*(r)*((1+r)**n)))/(((1+r)**n)-1)
-	M = round(M, 2)
-	r = r*12*100
-
-
-	return render(request, 'model/result.html', {'r': r , 'P': P , 'n': n , 'M': M , 'AMR': AMR})
+	return render(request, 'model/result.html', context)
 
 
 def compare(request):
@@ -66,4 +47,61 @@ def compare(request):
 
 
 def rescompare(request):
-	return render(request, 'model/rescompare.html')
+
+	price = int(request.GET.get('price1').replace(',', ''))
+	dpayment = int(request.GET.get('dp1').replace(',', ''))
+	if request.GET.get('deposit1'):
+		deposit = int(request.GET.get('deposit1').replace(',', ''))
+	else:
+		deposit=0
+	cscore = float(request.GET.get('cscore1'))
+	term = float(request.GET.get('term1'))
+	if request.GET.get('pts1'):
+		pts = float(request.GET.get('pts1').replace(',', ''))
+	else:
+		pts=0
+	ARM_rate = 0
+	if term.is_integer()==False:
+		ARM_rate = float(request.GET.get('ARM_rate1'))
+
+	morgage_type = request.GET.get('mtype1')
+	ref = request.GET.get('refinance1')
+	cref = request.GET.get('crefinance1')
+	fn = request.GET.get('foreign1')
+
+
+	price1 = int(request.GET.get('price2').replace(',', ''))
+	dpayment1 = int(request.GET.get('dp2').replace(',', ''))
+	if request.GET.get('deposit2'):
+		deposit1 = int(request.GET.get('deposit2').replace(',', ''))
+	else:
+		deposit1=0
+	cscore1 = float(request.GET.get('cscore2'))
+	term1 = float(request.GET.get('term2'))
+	if request.GET.get('pts2'):
+		pts1 = float(request.GET.get('pts2').replace(',', ''))
+	else:
+		pts1=0
+	ARM_rate1 = 0
+	if term1.is_integer()==False:
+		ARM_rate1 = float(request.GET.get('ARM_rate2'))
+
+	morgage_type1 = request.GET.get('mtype2')
+	ref1 = request.GET.get('refinance2')
+	cref1 = request.GET.get('crefinance2')
+	fn1 = request.GET.get('foreign2')
+
+
+	context_list1 = Dashboard.dash(price, dpayment, deposit, cscore, term, pts, morgage_type, ref, cref, fn, ARM_rate)
+	context_list2 = Dashboard.dash(price1, dpayment1, deposit1, cscore1, term1, pts1, morgage_type1, ref1, cref1, fn1, ARM_rate1)
+	context_list = context_list1 + context_list2
+
+	context = {'r': context_list[0] , 'P': context_list[1] , 'n': context_list[2] , 'M': context_list[3] , 'ARM': context_list[4], 'r_adj': context_list[5], 'principal_list': context_list[6], 'interest_list': context_list[7], 'plt_div': context_list[8], 'dfp': context_list[9], 'dfi': context_list[10], 'dfa': context_list[11], 'ARM_rate': context_list[12], 'plt2_div': context_list[13],
+		'r1': context_list[14] , 'P1': context_list[15] , 'n1': context_list[16] , 'M1': context_list[17] , 'ARM1': context_list[18], 'r_adj1': context_list[19], 'principal_list1': context_list[20], 'interest_list1': context_list[21], 'plt_div1': context_list[22], 'dfp1': context_list[23], 'dfi1': context_list[24], 'dfa1': context_list[25], 'ARM_rate1': context_list[26], 'plt2_div1': context_list[27]}
+
+
+	return render(request, 'model/rescompare.html', context)
+
+
+
+
