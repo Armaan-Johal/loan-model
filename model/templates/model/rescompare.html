@@ -1,88 +1,172 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{% extends "model/base.html" %}
 
-<div class="col-sm-12">
-	<div style="display: inline-block;">
-		<h2 style="text-align:left;">Results of First Loan</h2>
+{% load static %}
+
+{% block content %}
+
+<div class="container1 text-left" id:"cont">
+	<br>
+	<h3>Results</h3>
+	<div class='inputs'>
+		<h5>First Loan</h5>
+		<div class='first'>
+			<div class='first'>
+				<span>Morgage Type: {{ morgage_type }}</span> <br/>
+				<span>Purchase Price: {{ price }}</span> <br/>
+				<span>Down Payment: {{ dpayment }}</span> <br/>
+				{% if ARM%}
+				<span>Loan Term: {{ term }}/1 ARM</span> <br/>
+				<span>ARM Rate Increase: {{ ARM_rate }}% per year after {{ term }} years</span> <br/>
+				{% else %}
+				<span>Loan Term: {{ term }} Fixed</span> <br/>
+				{% endif %}
+				<span>Deposit Amount: {{ deposit }}</span> <br/>
+				<span>Points Paid Down: {{ pts }}</span> <br/>
+			</div>
+			<div class='second'>
+				{% if ref %}
+				<ul class='bullet'><li>Refinance</li></ul> <br/>
+				{% endif %}
+				{% if cref %}
+				<ul class='bullet'> <li>Cash Out Refinance</li></ul> <br/>
+				{% endif %}
+				{% if fn %}
+				<ul class='bullet'><li>Foreign National</li></ul> <br/>
+				{% endif %}
+			</div>
+			<div class='footer'>
+
+			</div>
+
+			<div class='following'>
+				<hr/>
+				<span>Rate=  </span>{{ r }}%
+				<br>
+				<span>Loan Amount=  </span>${{ P }}
+				<br>
+				<span>Total payments=  </span>{{ n }}
+				<br>
+				<span>Monthly payment=  </span>${{ M }}
+		<!-- 		<br>
+				{{ ARM }}      Is it an ARM? -->
+				<br>
+				{% if ARM %}
+				<span>ARM yearly rate increase=  </span>{{ ARM_rate }}%     
+				{% endif %}
+				<br>
+				<br>
+				<span>Total Principal Paid=  </span>${{ P }}
+				<br>
+				<span>Total Interest Paid=  </span>${{ dfi }}
+				<br>
+				<span>Total Amount Paid=  </span>${{ dfa }}
+			</div>
+
+		</div>
+
+		<div class='footer'>
+
+		</div>
 
 		<br>
-		{{ r }}% =     Interest rate
-		<br>
-		${{ P }} =     Loan Amount
-		<br>
-		{{ n }}  =    Total payments
-		<br>
-		${{ M }}  =    Monthly payment 
-		<br>
-		{{ ARM }}  =    Is it an ARM?
-		<br>
-		{% if ARM %}
-		{{ ARM_rate }}%  =   ARM yearly rate increase
-		{% endif %}
-		<br>
-		<br>
-		<br>
-		${{ P }}  =    Total Principal Paid
-		<br>
-		${{ dfi }}  =    Total Interest Paid
-		<br>
-		${{ dfa }}   =   Total Amount Paid
-		<br>
-		<br>
-		<a href= "{% url 'home' %}" class="btn btn-secondary">Home</a>
+
+
+		<div class='footer'>
+			{{ plt_div|safe }}
+
+			<br>
+			{{ plt2_div|safe }}
+
+			<br>
+		</div>
+
+		
 		<br>
 		<br>
 
-		{{ plt_div|safe }}
 
-		<br>
-		{{ plt2_div|safe }}
 
-		<br>
+		<h5>Second Loan</h5>
+		<div class='second'>
+			<div class='first'>
+				<span>Morgage Type: {{ morgage_type1 }}</span> <br/>
+				<span>Purchase Price: {{ price1 }}</span> <br/>
+				<span>Down Payment: {{ dpayment1 }}</span> <br/>
+				{% if ARM%}
+				<span>Loan Term: {{ term1 }}/1 ARM</span> <br/>
+				<span>ARM Rate Increase: {{ ARM_rate1 }}% per year after {{ term1 }} years</span> <br/>
+				{% else %}
+				<span>Loan Term: {{ term1 }} Fixed</span> <br/>
+				{% endif %}
+				<span>Deposit Amount: {{ deposit1 }}</span> <br/>
+				<span>Points Paid Down: {{ pts1 }}</span> <br/>
+			</div>
+			<div class='second'>
+				{% if ref1 %}
+				<ul class='bullet'><li>Refinance</li></ul> <br/>
+				{% endif %}
+				{% if cref1 %}
+				<ul class='bullet'> <li>Cash Out Refinance</li></ul> <br/>
+				{% endif %}
+				{% if fn1 %}
+				<ul class='bullet'><li>Foreign National</li></ul> <br/>
+				{% endif %}
+			</div>
 
+			<div class='footer'>
+
+			</div>
+
+
+			<div class='following'>
+				<hr/>
+				<span>Rate=  </span>{{ r1 }}%
+				<br>
+				<span>Loan Amount=  </span>${{ P1 }}
+				<br>
+				<span>Total payments=  </span>{{ n1 }}
+				<br>
+				<span>Monthly payment=  </span>${{ M1 }}
+		<!-- 		<br>
+				{{ ARM }}      Is it an ARM? -->
+				<br>
+				{% if ARM1 %}
+				<span>ARM yearly rate increase=  </span>{{ ARM_rate1 }}%     
+				{% endif %}
+				<br>
+				<br>
+				<span>Total Principal Paid=  </span>${{ P1 }}
+				<br>
+				<span>Total Interest Paid=  </span>${{ dfi1 }}
+				<br>
+				<span>Total Amount Paid=  </span>${{ dfa1 }}
+			</div>
+
+			<br>
+
+			{{ plt_div1|safe }}
+
+			<br>
+			{{ plt2_div1|safe }}
+
+			<br>
+
+		</div>
+
+		<div class='footer'>
+
+		</div>
 
 	</div>
-	<div style="display: inline-block;">
-		<br>
-		<h2 style="text-align:left;">Results of Second Loan</h2>
 
-		<br>
-		{{ r1 }}%  =    rate
-		<br>
-		${{ P1 }}  =    Loan Amount
-		<br>
-		{{ n1 }}  =    Total payments
-		<br>
-		${{ M1 }}  =    Monthly payment 
-		<br>
-		{{ ARM1 }}  =    Is it an ARM?
-		<br>
-		{% if ARM1 %}
-		{{ ARM_rate1 }}%   =  ARM yearly rate increase
-		{% endif %}
-		<br>
-		<br>
-		<br>
-		${{ P1 }}    =  Total Principal Paid
-		<br>
-		${{ dfi1 }}   =   Total Interest Paid
-		<br>
-		${{ dfa1 }}  =    Total Amount Paid
-		<br>
-		<br>
-		<a href= "{% url 'compare' %}" class="btn btn-success">Compare with Another Loan</a>
-		<br>
-		<br>
+	<br>
+	<a href= "{% url 'home' %}" class="btn btn-secondary">Home</a>
+	<br>
+	<br>
+	<a href= "{% url 'compare' %}" class="btn btn-success">Compare with Another Loan</a>
+	<br>
+	<br>
 
-		{{ plt_div1|safe }}
-
-		<br>
-		{{ plt2_div1|safe }}
-
-		<br>
-		<br>
-
-
-	</div>
-</div>
+{% endblock %}
 
 

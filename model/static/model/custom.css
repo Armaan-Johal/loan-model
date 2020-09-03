@@ -1,0 +1,64 @@
+html {
+    min-height:100%;
+}
+
+body {
+  /* background-color: #d4edff;*/
+  height:100%;
+  background-image: linear-gradient(to bottom right, #c4ddef, #d4eddf)
+}
+
+.container1 {
+	width: 600px;
+}
+
+
+
+.inputs {
+	
+	background-image: linear-gradient(to bottom right, #e3e4e6, #c0c1c2);
+	padding: 25px;
+	border-radius: 25px;
+	font-weight: bold;
+	font-size = 20rem;
+}
+
+.first {
+	float: left;
+	padding: 20px;
+}
+.second {
+	float: left;
+	padding: 20px;
+}
+.third {
+	float: left;
+	padding: 20px;
+}
+.fourth {
+	float: left;
+	padding: 20px;
+}
+.fifth {
+	float: left;
+	padding: 20px;
+}
+.footer {
+	clear: both;
+}
+.optional{
+	font-style: italic;
+}
+.bullet {
+	margin-left: 5px;
+	padding-left: 5px;
+	font-size: 1rem;
+	list-style-type: none;
+}
+.bullet li:before {
+  content: '✓ ';
+}
+.following {
+	padding: 20px;
+}
+

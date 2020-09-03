@@ -1,56 +1,96 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+{% extends "model/base.html" %}
+
+{% load static %}
+
+{% block content %}
 
 <div class="container text-left">
 	<br>
 	<h1>Loan Pricing Model Tool</h1>
 
-	<form action="{%  url 'result' %}">
-		<select name="mtype">
-			<option value="Residential">Residential</option>
-			<option value="Commercial">Commercial</option>
-		</select> Morgage Type
-	<br>
-		<input type="text" name="price" required=True> Purchase Price
-	<br>
-		<input type="text" name="dp" required=True> Down Payment (%)
-	<br>
-		<select name="cscore">
-			<option value="0">N/A</option>
-			<option value="0.375"><650</option>
-			<option value="0.2">651-700</option>
-			<option value="0" selected="selected">701-750</option>
-			<option value="-0.1">751-800</option>
-			<option value="-0.25">801+</option>
-		</select> Credit Score Range
-	<br>
-		<select name="term">
-			<option value="5">5-Year Fixed</option>
-			<option value="10">10-Year Fixed</option>
-			<option value="15">15-Year Fixed</option>
-			<option value="30" selected="selected">30-Year Fixed</option>
-			<option value="1.1">1/1 ARM</option>
-			<option value="3.1">3/1 ARM</option>
-			<option value="5.1">5/1 ARM</option>
-			<option value="10.1">10/1 ARM</option>
-		</select> Loan Term
-	<br>
-		<input type="text" name="ARM_rate"> Yearly Increase in ARM Rate (%) (if applicable)
-	<br>
-		<input type="text" name="deposit"> Deposit Amount (if applicable)
-	<br>
-		<input type="text" name="pts"> Points Paid Down
-	<br>
-		<input type="checkbox" name="refinance"> Refinance
-	<br>
-		<input type="checkbox" name="crefinance"> Cash Out Refinance
-	<br>
-		<input type="checkbox" name="foreign"> Foreign National
-	<br>
-		<input type="submit" value="View Loan" class="btn btn-primary">
-	</form>
-	
-	<a href="{% url 'compare' %}" class="btn btn-success">Compare with Another Loan</a>
+	<div class='inputs'>
+		<form action="{%  url 'result' %}">
+		<div class='first'>
+			<span>Purchase Price</span> <br>
+				<input type="text" name="price" required=True>
+			<br>
+			<span>Down Payment (%)</span> <br>
+				<input type="text" name="dp" required=True>
+			<br>
+		</div>
+		<div class='second'>
+			<span>Morgage Type</span> 
+			<br>
+			<select name="mtype">
+				<option value="Residential">Residential</option>
+				<option value="Commercial">Commercial</option>
+			</select> 
+			<br>
+			<span>Credit Score </span> <br>
+				<select name="cscore">
+					<option value="0">N/A</option>
+					<option value="0.375"><650</option>
+					<option value="0.2">651-700</option>
+					<option value="0" selected="selected">701-750</option>
+					<option value="-0.1">751-800</option>
+					<option value="-0.25">801+</option>
+				</select>
+			<br>
+		</div>
+		<div class='third'>
+			<span>Loan Term</span> <br>
+				<select name="term">
+					<option value="5">5-Year Fixed</option>
+					<option value="10">10-Year Fixed</option>
+					<option value="15">15-Year Fixed</option>
+					<option value="30">30-Year Fixed</option>
+					<option value="1.1">1/1 ARM</option>
+					<option value="3.1">3/1 ARM</option>
+					<option value="5.1" selected="selected" >5/1 ARM</option>
+					<option value="7.1">7/1 ARM</option>
+					<option value="10.1">10/1 ARM</option>
+				</select>
+			<br>
+		
+			<span class='optional'>ARM Rate Increase (%)</span> <br>
+				<input type="text" name="ARM_rate"> 
+			<br>
+		</div>
+		<div class='fourth'>
+			<span class='optional'>Deposit Amount</span> <br>
+				<input type="text" name="deposit"> 
+			<br>
+			<span class='optional'>Points Paid Down</span> <br>
+				<input type="text" name="pts"> 
+			<br>
+		</div>
+		<div class='fifth'>
+			<br>
+				<input type="checkbox" name="refinance"> Refinance
+			<br>
+				<input type="checkbox" name="crefinance"> Cash Out Refinance
+			<br>
+				<input type="checkbox" name="foreign"> Foreign National
+		</div>
+		
+
+		<div class='footer'>
+		<br>
+			<input type="submit" value="View Loan" class="btn btn-primary">
+		<br>
+		<br>
+		<a href="{% url 'compare' %}" class="btn btn-success">Compare with Another Loan</a>
+		<br>
 
 
+		</div>
+		</form>
+	</div>
+	<br>
 
 </div>
+
+
+
+{% endblock %}

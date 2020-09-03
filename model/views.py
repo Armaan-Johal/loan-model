@@ -27,9 +27,10 @@ def result(request):
 		pts = float(request.GET.get('pts').replace(',', ''))
 	else:
 		pts=0
-	ARM_rate = 0
-	if term.is_integer()==False:
+	if request.GET.get('ARM_rate'):
 		ARM_rate = float(request.GET.get('ARM_rate'))
+	else:
+			ARM_rate = 0
 
 	morgage_type = request.GET.get('mtype')
 	ref = request.GET.get('refinance')
@@ -37,7 +38,10 @@ def result(request):
 	fn = request.GET.get('foreign')
 
 	context_list = Dashboard.dash(price, dpayment, deposit, cscore, term, pts, morgage_type, ref, cref, fn, ARM_rate)
-	context = {'r': context_list[0] , 'P': context_list[1] , 'n': context_list[2] , 'M': context_list[3] , 'ARM': context_list[4], 'r_adj': context_list[5], 'principal_list': context_list[6], 'interest_list': context_list[7], 'plt_div': context_list[8], 'dfp': context_list[9], 'dfi': context_list[10], 'dfa': context_list[11], 'ARM_rate': context_list[12], 'plt2_div': context_list[13]}
+	if term.is_integer()==False:
+		term=int(term-0.1)
+	context = {'r': context_list[0] , 'P': context_list[1] , 'n': context_list[2] , 'M': context_list[3] , 'ARM': context_list[4], 'r_adj': context_list[5], 'principal_list': context_list[6], 'interest_list': context_list[7], 'plt_div': context_list[8], 'dfp': context_list[9], 'dfi': context_list[10], 'dfa': context_list[11], 'ARM_rate': context_list[12], 'plt2_div': context_list[13],
+		'price': price, 'dpayment': dpayment, 'deposit': deposit, 'cscore': cscore, 'term': term, 'pts': pts, 'morgage_type': morgage_type, 'ref': ref, 'cref': cref, 'fn': fn}
 
 	return render(request, 'model/result.html', context)
 
@@ -60,9 +64,10 @@ def rescompare(request):
 		pts = float(request.GET.get('pts1').replace(',', ''))
 	else:
 		pts=0
-	ARM_rate = 0
-	if term.is_integer()==False:
+	if request.GET.get('ARM_rate1'):
 		ARM_rate = float(request.GET.get('ARM_rate1'))
+	else:
+			ARM_rate = 0
 
 	morgage_type = request.GET.get('mtype1')
 	ref = request.GET.get('refinance1')
@@ -82,9 +87,10 @@ def rescompare(request):
 		pts1 = float(request.GET.get('pts2').replace(',', ''))
 	else:
 		pts1=0
-	ARM_rate1 = 0
-	if term1.is_integer()==False:
+	if request.GET.get('ARM_rate2'):
 		ARM_rate1 = float(request.GET.get('ARM_rate2'))
+	else:
+			ARM_rate1 = 0
 
 	morgage_type1 = request.GET.get('mtype2')
 	ref1 = request.GET.get('refinance2')
@@ -97,7 +103,9 @@ def rescompare(request):
 	context_list = context_list1 + context_list2
 
 	context = {'r': context_list[0] , 'P': context_list[1] , 'n': context_list[2] , 'M': context_list[3] , 'ARM': context_list[4], 'r_adj': context_list[5], 'principal_list': context_list[6], 'interest_list': context_list[7], 'plt_div': context_list[8], 'dfp': context_list[9], 'dfi': context_list[10], 'dfa': context_list[11], 'ARM_rate': context_list[12], 'plt2_div': context_list[13],
-		'r1': context_list[14] , 'P1': context_list[15] , 'n1': context_list[16] , 'M1': context_list[17] , 'ARM1': context_list[18], 'r_adj1': context_list[19], 'principal_list1': context_list[20], 'interest_list1': context_list[21], 'plt_div1': context_list[22], 'dfp1': context_list[23], 'dfi1': context_list[24], 'dfa1': context_list[25], 'ARM_rate1': context_list[26], 'plt2_div1': context_list[27]}
+		'r1': context_list[14] , 'P1': context_list[15] , 'n1': context_list[16] , 'M1': context_list[17] , 'ARM1': context_list[18], 'r_adj1': context_list[19], 'principal_list1': context_list[20], 'interest_list1': context_list[21], 'plt_div1': context_list[22], 'dfp1': context_list[23], 'dfi1': context_list[24], 'dfa1': context_list[25], 'ARM_rate1': context_list[26], 'plt2_div1': context_list[27],
+			'price': price, 'dpayment': dpayment, 'deposit': deposit, 'cscore': cscore, 'term': term, 'pts': pts, 'morgage_type': morgage_type, 'ref': ref, 'cref': cref, 'fn': fn,
+			'price1': price1, 'dpayment1': dpayment1, 'deposit1': deposit1, 'cscore1': cscore1, 'term1': term1, 'pts1': pts1, 'morgage_type1': morgage_type1, 'ref1': ref1, 'cref1': cref1, 'fn1': fn1}
 
 
 	return render(request, 'model/rescompare.html', context)
